@@ -1,0 +1,14 @@
+{
+  "name": "playwright-workshop-101",
+  "version": "1.0.0",
+  "description": "In this Learn lab, you'll learn how to use the Playwright open-source test automation framework for building an end-to-end test specification for a sample application.   - We'll be using a _modified version_ of the [TasteJS TODO MVC application](https://github.com/tastejs/todomvc)  - Our version reflects [this Playwright demo](https://demo.playwright.dev/todomvc) that's used as an example.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.38.1",
+    "@types/node": "^20.8.2"
+  }
+}

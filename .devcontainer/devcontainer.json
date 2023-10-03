@@ -1,0 +1,47 @@
+{
+    "name": "Playwright-Learn-Nextjs",
+  
+      "image": "mcr.microsoft.com/playwright:v1.38.0-jammy",
+      "features": {
+          "ghcr.io/devcontainers/features/node:1": {
+              "nodeGypDependencies": true,
+              "version": "18"
+          },
+          "ghcr.io/devcontainers-contrib/features/npm-package:1": {
+              "package": "typescript",
+              "version": "latest"
+          },
+      "ghcr.io/devcontainers/features/github-cli:1": {
+        "version": "latest"
+      }
+      },
+  
+    "hostRequirements": {
+      "cpus": 4
+    },
+  
+    "waitFor": "onCreateCommand",
+    "updateContentCommand": "npm install",
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    "postAttachCommand": { },
+  
+    "customizations": {
+      "codespaces": {
+        "openFiles": [
+          "README.md"
+        ]
+      },
+  
+      "vscode": {
+        "extensions": [
+          "ms-playwright.playwright"
+        ]
+      }
+    },
+  
+    "portsAttributes": {
+    },
+  
+    "forwardPorts": []
+  }
+  
