@@ -1,5 +1,5 @@
 {
-    "name": "Playwright-Learn-Nextjs",
+    "name": "Playwright Workshop 101",
   
       "image": "mcr.microsoft.com/playwright:v1.38.0-jammy",
       "features": {

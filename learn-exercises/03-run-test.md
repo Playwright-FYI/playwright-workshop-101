@@ -366,3 +366,5 @@ With this simple example, you know three powerful concepts in Playwright Testing
  * [Assertions](https://playwright.dev/docs/test-assertions) - for validating outcomes of automated actions _web-first_.
 
 Take a few minutes to familiarize yourself with the documentation for those three features and APIs - and you should be all set to dive into _designing and authoring_ an end-to-end specification for the sample application.
+
+🚀 | Excellent! Now let's talk about the core Developer Tools for Playwright! 
