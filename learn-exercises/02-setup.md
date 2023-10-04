@@ -33,7 +33,7 @@ Congratulations - you are now running in a GitHub Codespace. There is a generous
 🚀 | You are now ready to validate the sample application.
 
 
-## Step 3: Validate The Sample Application
+## Step 3: Validate The Sample App
 
 The repository comes with a [sample application](./app-todomvc/) that we'll be testing. Before we get started, let's make sure the application runs as expected.
 
@@ -127,7 +127,7 @@ Running 72 tests using 3 workers
 
 🚀 | Congratulations!! We valdiate the Playwright Test Runner.
 
-## Step 6: Validate Test Run With Sample App
+## Step 6: Validate Test With Sample App
 
 Since the sample application is _exactly the same_ as the deployed application, we should be able to run the tests against the _local preview endpoint_ and have them pass. Right?
 
