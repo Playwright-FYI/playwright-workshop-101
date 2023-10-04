@@ -16,9 +16,9 @@ import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS, ENTER_KEY } from "./constants
 
 class TodoApp extends React.Component<IAppProps, IAppState> {
 
-  public state : IAppState;
+  public state: IAppState;
 
-  constructor(props : IAppProps) {
+  constructor(props: IAppProps) {
     super(props);
     this.state = {
       nowShowing: ALL_TODOS,
@@ -29,14 +29,14 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
   public componentDidMount() {
     var setState = this.setState;
     var router = Router({
-      '/': setState.bind(this, {nowShowing: ALL_TODOS}),
-      '/active': setState.bind(this, {nowShowing: ACTIVE_TODOS}),
-      '/completed': setState.bind(this, {nowShowing: COMPLETED_TODOS})
+      '/': setState.bind(this, { nowShowing: ALL_TODOS }),
+      '/active': setState.bind(this, { nowShowing: ACTIVE_TODOS }),
+      '/completed': setState.bind(this, { nowShowing: COMPLETED_TODOS })
     });
     router.init('/');
   }
 
-  public handleNewTodoKeyDown(event : React.KeyboardEvent) {
+  public handleNewTodoKeyDown(event: React.KeyboardEvent) {
     if (event.keyCode !== ENTER_KEY) {
       return;
     }
@@ -51,31 +51,31 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
     }
   }
 
-  public toggleAll(event : React.FormEvent) {
-    var target : any = event.target;
+  public toggleAll(event: React.FormEvent) {
+    var target: any = event.target;
     var checked = target.checked;
     this.props.model.toggleAll(checked);
   }
 
-  public toggle(todoToToggle : ITodo) {
+  public toggle(todoToToggle: ITodo) {
     this.props.model.toggle(todoToToggle);
   }
 
-  public destroy(todo : ITodo) {
+  public destroy(todo: ITodo) {
     this.props.model.destroy(todo);
   }
 
-  public edit(todo : ITodo) {
-    this.setState({editing: todo.id});
+  public edit(todo: ITodo) {
+    this.setState({ editing: todo.id });
   }
 
-  public save(todoToSave : ITodo, text : String) {
+  public save(todoToSave: ITodo, text: String) {
     this.props.model.save(todoToSave, text);
-    this.setState({editing: null});
+    this.setState({ editing: null });
   }
 
   public cancel() {
-    this.setState({editing: null});
+    this.setState({ editing: null });
   }
 
   public clearCompleted() {
@@ -89,12 +89,12 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
 
     var shownTodos = todos.filter((todo) => {
       switch (this.state.nowShowing) {
-      case ACTIVE_TODOS:
-        return !todo.completed;
-      case COMPLETED_TODOS:
-        return todo.completed;
-      default:
-        return true;
+        case ACTIVE_TODOS:
+          return !todo.completed;
+        case COMPLETED_TODOS:
+          return todo.completed;
+        default:
+          return true;
       }
     });
 
@@ -108,7 +108,7 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
           onEdit={this.edit.bind(this, todo)}
           editing={this.state.editing === todo.id}
           onSave={this.save.bind(this, todo)}
-          onCancel={ e => this.cancel() }
+          onCancel={e => this.cancel()}
         />
       );
     });
@@ -129,7 +129,7 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
           count={activeTodoCount}
           completedCount={completedCount}
           nowShowing={this.state.nowShowing}
-          onClearCompleted={ e=> this.clearCompleted() }
+          onClearCompleted={e => this.clearCompleted()}
         />;
     }
 
@@ -140,7 +140,7 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
             id="toggle-all"
             className="toggle-all"
             type="checkbox"
-            onChange={ e => this.toggleAll(e) }
+            onChange={e => this.toggleAll(e)}
             checked={activeTodoCount === 0}
           />
           <label
@@ -163,7 +163,7 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
             ref="newField"
             className="new-todo"
             placeholder="What needs to be done?"
-            onKeyDown={ e => this.handleNewTodoKeyDown(e) }
+            onKeyDown={e => this.handleNewTodoKeyDown(e)}
             autoFocus={true}
           />
         </header>
@@ -176,9 +176,10 @@ class TodoApp extends React.Component<IAppProps, IAppState> {
 
 var model = new TodoModel('react-todos');
 
+
 function render() {
   ReactDOM.render(
-    <TodoApp model={model}/>,
+    <TodoApp model={model} />,
     document.getElementsByClassName('todoapp')[0]
   );
 }

@@ -271,10 +271,10 @@ var TodoItem = (function (_super) {
                 editing: this.props.editing
             }) },
             React.createElement("div", { className: "view" },
-                React.createElement("input", { className: "toggle", type: "checkbox", checked: this.props.todo.completed, onChange: this.props.onToggle }),
+                React.createElement("input", { "aria-label": "Toggle Todo", className: "toggle", type: "checkbox", checked: this.props.todo.completed, onChange: this.props.onToggle }),
                 React.createElement("label", { "data-testid": "todo-title", onDoubleClick: function (e) { return _this.handleEdit(); } }, this.props.todo.title),
-                React.createElement("button", { className: "destroy", onClick: this.props.onDestroy })),
-            React.createElement("input", { ref: "editField", className: "edit", value: this.state.editText, onBlur: function (e) { return _this.handleSubmit(e); }, onChange: function (e) { return _this.handleChange(e); }, onKeyDown: function (e) { return _this.handleKeyDown(e); } })));
+                React.createElement("button", { "aria-label": "Delete", className: "destroy", onClick: this.props.onDestroy })),
+            React.createElement("input", { "aria-label": "Edit", ref: "editField", className: "edit", value: this.state.editText, onBlur: function (e) { return _this.handleSubmit(e); }, onChange: function (e) { return _this.handleChange(e); }, onKeyDown: function (e) { return _this.handleKeyDown(e); } })));
     };
     return TodoItem;
 }(React.Component));

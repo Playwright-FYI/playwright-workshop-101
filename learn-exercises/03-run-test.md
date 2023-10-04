@@ -8,8 +8,31 @@
 
 ## Task 4: View Test Specification
 
-## Task 5: Understand Contexts & Test Isolation
+```js
+import { test, expect } from '@playwright/test';
 
-## Task 6: Understand Locators & Auto-Waiting
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
 
-## Task 7: Understand Web-First Assertions
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
+});
+
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+```
+
+## Task 5: Explore Contexts: `page`
+
+## Task 6: Arrange with Navigation: `page.goto()`
+
+## Task 7: Act with Locators: `page.getByRole()`
+
+## Task 8: Assert with Expect: `expect(<locator>).toBeVisible()`

@@ -30,31 +30,31 @@ class TodoFooter extends React.Component<ITodoFooterProps, {}> {
     const nowShowing = this.props.nowShowing;
     return (
       <footer className="footer">
-        <span className="todo-count">
+        <span data-testid="todo-count" className="todo-count">
           <strong>{this.props.count}</strong> {activeTodoWord} left
         </span>
         <ul className="filters">
           <li>
             <a
               href="#/"
-              className={classNames({selected: nowShowing === ALL_TODOS})}>
-                All
+              className={classNames({ selected: nowShowing === ALL_TODOS })}>
+              All
             </a>
           </li>
           {' '}
           <li>
             <a
               href="#/active"
-              className={classNames({selected: nowShowing === ACTIVE_TODOS})}>
-                Active
+              className={classNames({ selected: nowShowing === ACTIVE_TODOS })}>
+              Active
             </a>
           </li>
           {' '}
           <li>
             <a
               href="#/completed"
-              className={classNames({selected: nowShowing === COMPLETED_TODOS})}>
-                Completed
+              className={classNames({ selected: nowShowing === COMPLETED_TODOS })}>
+              Completed
             </a>
           </li>
         </ul>

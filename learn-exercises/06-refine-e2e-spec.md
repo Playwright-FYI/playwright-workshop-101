@@ -8,6 +8,8 @@
 
 ## Task 4: Modify Configuration
 
-## Task 4: Refine Annotations
+## Task 5: Refine Annotations
+
+## Task 6: Pick Locator
 
 
