@@ -37,19 +37,27 @@ Congratulations - you are now running in a GitHub Codespace. There is a generous
 
 The repository comes with a [sample application](./app-todomvc/) that we'll be testing. Before we get started, let's make sure the application runs as expected.
 
+1. Change to the application directory
 ```bash
-# Change to the application directory
-$ cd app-todomvc
+cd app-todomvc
+```
 
-# Use a recent Node.js version (I prefer LTS)
-$ nvm use --lts
+2. Use a recent Node.js version (for example LTS)
+```bash
+nvm use --lts
+```
+You should now see the version of Node you are using:
+```bash
 Now using node v18.18.0 (npm v9.8.1)
+```
 
-# Follow instructions to build and run app
-$ npm install typescript
-$ npm run build
-$ npm run start
-
+3. Follow instructions to build and run app
+```bash
+npm run build
+npm run start
+```
+After running the above commands you should now see a message in the terminal telling you that the app has started and is being served.
+```bash
 > start
 > node ./serve.js
 
@@ -80,12 +88,31 @@ The repository has been setup to have a Playwright project scaffolded at the roo
  4. `.github/workflows/playwright.yml` - GitHub Action for automating tests
 
 Let's start off by checking if the Playwright installation is correct:
+
 ```bash
-$ npx playwright --version
+npx playwright --version
+```
+
+You should now see the version of Playwright you are using.
+
+```bash
 Version 1.38.1
 ```
 
-This tells us two things. First, that Playwright Test (library) and its dependencies (browsers) are pre-installed in this environment. Second, that we are in fact running the latest version of Playwright (at this time).
+This tells us two things. First, that Playwright Test (test runner) and its dependencies (browsers) are pre-installed in this environment. Second, which version of Playwright we are running. The latest version of Playwright at the time of writing this was '1.38.1'.
+
+Playwright releases a new version every month. If you want to update to the latest version run the following command:
+
+```bash
+npm install -D @playwright/test@latest
+```
+
+Once you update to the latest version of Playwright you will then need to install the latest browsers as these are not installed by default when installing Playwright.
+
+```bash
+npx playwright install
+```
+
 
 ## Step 5: Validate Playwright Test Runner
 
@@ -100,7 +127,11 @@ test.beforeEach(async ({ page }) => {
 Let's go ahead and run the Playwright test. 
 
 ```bash
-$ npx playwright test tests-examples/demo-todo-app.spec.ts
+npx playwright test tests-examples/demo-todo-app.spec.ts
+```
+You will get the following error message:
+
+```bash
 Error: No tests found
 ```
 
@@ -117,15 +148,30 @@ export default defineConfig({
 
 This property tells the Playwright Test runner to look _only within the subfolders of that root directory_ to locate relevant test specifications. Since our `demo-todo-app.spec.ts` was in a sibling `test-examples/` folder, it was not seen.
 
-Let's change that. Modify the line to read `testDir: '.'`. We are now telling Playwright that top-level folder for test specifications is the root of the repo - so _all_ test specifications in the repo now become discoverable. _Save the change, then run the test again_.
+Let's change that. Modify the line to read `testDir: '.'`. 
+
+```js
+export default defineConfig({
+  testDir: '.',
+  ..
+})
+```
+
+We are now telling Playwright that the top-level folder for test specifications is the root of the repo - so _all_ test specifications in the repo now become discoverable. _Save the change, then run the test again_.
 
 ```bash
-$ npx playwright test tests-examples/demo-todo-app.spec.ts
+npx playwright test tests-examples/demo-todo-app.spec.ts
+```
+Once the tests have finished running you should see that 72 tests were run using 3 workers, as well as how many tests passed and how long it took to run.
+
+```bash
 Running 72 tests using 3 workers
   72 passed (44.5s)
 ```
 
-🚀 | Congratulations!! We valdiate the Playwright Test Runner.
+> Playwright runs tests in Parallel by default using workers. The amount of workers available will depend on your CPU. Playwright will use half of the available CPU cores.
+
+🚀 | Congratulations!! We validated the Playwright Test Runner.
 
 ## Step 6: Validate Test With Sample App
 
@@ -137,14 +183,19 @@ Let's try this out. Note that I am assuming you still have your sample app runni
 
 Once it is running, then run Playwright Test as follows - note that this time, for fun, we've added an option `--project chromium`. This tells the Playwright Test runner to run this only for the single browser (chromium) instead of all three (default option).
 
+Run the demo-todo-local test - default 1 browser:
+
 ```bash
-# Run the demo-todo-local test - default 1 browser
-$npx playwright test demo-todo-local --project chromium
+npx playwright test demo-todo-local --project chromium
+```
+You should now see only 24 tests were run using 3 workers as tests are only run on one browser, therefore less tests are being run.
+
+```bash
 Running 24 tests using 3 workers
   24 passed (13.0s)
 ```
 
-🚀 |  We've validated that the sample app passes the demo script!!
+🚀 |  We've validated that the tests from the demo todo app pass!!
 
 
 ## 🛑 | Don't Forget To Reset `testDir`
@@ -158,6 +209,8 @@ export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
+  ..
+})
 ```
 
 🚀 | Let's move on and learn more about the Playwright Test Specification!
