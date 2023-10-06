@@ -42,7 +42,8 @@ The repository comes with a [sample application](./app-todomvc/) that we'll be t
 cd app-todomvc
 ```
 
-2. Use a recent Node.js version (for example LTS)
+2. Use a recent Node.js version (for example LTS). You can use the [Node Version Manager](https://github.com/nvm-sh/nvm) to easily switch versions.
+
 ```bash
 nvm use --lts
 ```
@@ -51,7 +52,7 @@ You should now see the version of Node you are using:
 Now using node v18.18.0 (npm v9.8.1)
 ```
 
-3. Follow instructions to build and run app
+1. Follow instructions to build and run app
 ```bash
 npm run build
 npm run start
@@ -87,21 +88,7 @@ The repository has been setup to have a Playwright project scaffolded at the roo
  3. `tests-examples/` - staging folder with demo test scripts to try out.
  4. `.github/workflows/playwright.yml` - GitHub Action for automating tests
 
-Let's start off by checking if the Playwright installation is correct:
-
-```bash
-npx playwright --version
-```
-
-You should now see the version of Playwright you are using.
-
-```bash
-Version 1.38.1
-```
-
-This tells us two things. First, that Playwright Test (test runner) and its dependencies (browsers) are pre-installed in this environment. Second, which version of Playwright we are running. The latest version of Playwright at the time of writing this was '1.38.1'.
-
-Playwright releases a new version every month. If you want to update to the latest version run the following command:
+Playwright releases a new version every month. Let's update to the latest version by running the following command:
 
 ```bash
 npm install -D @playwright/test@latest
@@ -112,7 +99,6 @@ Once you update to the latest version of Playwright you will then need to instal
 ```bash
 npx playwright install
 ```
-
 
 ## Step 5: Validate Playwright Test Runner
 
@@ -168,8 +154,6 @@ Once the tests have finished running you should see that 72 tests were run using
 Running 72 tests using 3 workers
   72 passed (44.5s)
 ```
-
-> Playwright runs tests in Parallel by default using workers. The amount of workers available will depend on your CPU. Playwright will use half of the available CPU cores.
 
 🚀 | Congratulations!! We validated the Playwright Test Runner.
 
