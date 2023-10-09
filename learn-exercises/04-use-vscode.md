@@ -58,7 +58,7 @@ Here's how UI mode is described in the [Playwright docs](https://playwright.dev/
 To run it in a local environment, just run your tests with the `--ui` flag. However, as shown above, this will not work within a dev container. However, the Playwright Team [introduced a workaround](https://playwright.dev/docs/test-ui-mode#docker--github-codespaces) where the endpoint needs to be bound to the `0.0.0.0` interface to become accessible on the host machine. You can also specify a hardcoded port (using `--ui-port`) if needed. Let's try it:
 
 ```bash
-$ npx playwright test --ui-port=8080 --ui-host=0.0.0.0
+npx playwright test --ui-port=8080 --ui-host=0.0.0.0
 ```
 
 You should see a popup like this, indicating UI mode is activated.
@@ -89,7 +89,7 @@ Consider this scenario. Our example test specification tests the workflow of a u
  - finds the "Get Started" link and clicks it
  - visits the [correct page](https://playwright.dev/docs/intro) and starts reading.
 
-Let's continue that scenario. The user finds a that there is a link on that page titled "How to run the example test" and they click on it - to find themselves navigating to the relevant section lower down on the same page. **How do we test this and how does UI Mode with Watch help?** 
+Let's continue that scenario. The user finds that there is a link on that page titled "How to run the example test" and they click on it - to find themselves navigating to the relevant section lower down on the same page. **How do we test this and how does UI Mode with Watch help?** 
 
 First, let's [turn on _Watch mode_](https://playwright.dev/docs/test-ui-mode#watch-mode) as shown below (see the blue eye icon with the 'Watch all' tooltip). This will now start tracking the test specification identified below it, and automatically re-run those tests if they change.
 
@@ -134,7 +134,7 @@ This has the added value of allowing the developer to stay _in the flow_ in thei
 🛑 | We made some changes to the `example.spec.ts` for these exercises. Want to revert the changes? Just replace the modified version from a copy of the original:
 
 ```bash
-$ cp tests-example/orig-example.spec.ts tests/example.spec.ts
+cp tests-example/orig-example.spec.ts tests/example.spec.ts
 ```
 
 We saved the best for last. Now, we come to the last 2 features of the VS Code Extension that will be _most_ valuable to developers: _Debugging_ and _Generating_ tests.

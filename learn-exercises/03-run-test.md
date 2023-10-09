@@ -6,13 +6,16 @@ Let's get started.
 
 ## Step 1: Run Example Test Spec
 
-Recall that we reset our `testDir` to point to `tests/`. That means the Playwright Test runner will only find specifications within the `tests/*` sub-tree. Right now that contains a single file - `example.spec.ts` - which is provided by default when you initialize a new Playwright project.
+Recall that we reset our `testDir` to point to the `tests/` directory. That means the Playwright Test runner will only find specifications within the `tests/*` sub-tree. Right now that contains a single file - `example.spec.ts` - which is provided by default when you initialize a new Playwright project.
 
-Let's run the test. We get the following output - indicating that all tests passed. But what does `6 tests` and `3 workers` mean given we only had one test specfication?
+Let's run the test. 
 
 ```bash
-$ npx playwright test
+npx playwright test
+```
+We get the following output - indicating that all tests passed. But what does `6 tests` and `3 workers` mean given we only had one test specification?
 
+```bash
 Running 6 tests using 3 workers
   6 passed (8.2s)
 
@@ -22,11 +25,15 @@ To open last HTML report run:
 
 ## Step 2: View Test Report
 
-Let's see if the HTML report gives us any more information. Note that again, GitHub Codespaces forwards the port for the report server so you can view it on the browser in your host machine.
+Let's see if the HTML report gives us any more information.
 
 ```bash
-$ npx playwright show-report
-  Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.
+npx playwright show-report
+```
+Note that again, GitHub Codespaces forwards the port for the report server so you can view it on the browser in your host machine.
+
+```bash
+Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.
 ```
 
 Opening the browser to that URL shows us a report with these insights:
@@ -48,6 +55,8 @@ Clicking on a particular row gives you the detailed run of that test case:
 ![Playwright Example Spec Report Detail](./assets/03-run-report-detail.png)
 
 This answers our question on what the `6 tests` were. But what does `3 workers` mean? And where did we define these configuration parameters and test specification actions? 
+
+By default Playwright runs tests in parallel. To do this it uses workers. The number of workers is determined by the number of CPU cores available. Playwright will use half of the available CPU cores. You can override this by setting the `workers` property in the [Playwright Configuration](https://playwright.dev/docs/test-configuration) file.
 
 ## Step 3: Understand TestConfig
 
@@ -126,11 +135,14 @@ First, update the `projects` object in the configuration file to comment out or 
   ],
 ```
 
-Run the test - excellent! We can see that we now have the 2 test cases running on a single browser project, giving us 2 test executions.
+Run the test - excellent!
 
 ```bash
-$ npx playwright test
+npx playwright test
+```
+We can see that we now have the 2 test cases running on a single browser project, giving us 2 test executions.
 
+```bash
 Running 2 tests using 2 workers
   2 passed (1.9s)
 ```
@@ -172,15 +184,26 @@ I chose the `iPhone 12 Pro`. Here is that [that profile description](https://git
   },
 ```
 
-Let's run the test again - and this time, open the report to see what happened.
+Let's run the test again.
 
 ```bash
-$ npx playwright test
+npx playwright test
+```
+This will run our two tests on both the `chromium` and `iPhone 12 Pro` projects. We can see that we now have 4 test executions.
+
+```bash
 Running 4 tests using 3 workers
   4 passed (4.5s)
+```
+This time, lets open the report to see what happened.
 
-$ npx playwright show-report
-  Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.
+```bash
+npx playwright show-report
+```
+This will serve the report on a local server - and open the browser to that URL.
+
+```bash
+Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.
 ```
 
 Note how the same 2 test cases are executed, now with the `chromium` browser and the `iPhone 12 Pro` device emulator. We can see that the emulator takes a little longer to run each test compared to the browser engines.
@@ -202,22 +225,39 @@ These options can be set at the [Browser](https://playwright.dev/docs/api/class-
 Let's try to `use` the Recording feature to turn on traces and take a screenshot for our projects. This should let us get a _visual_ and _system_ level understanding of what happens in test execution. Update the _top-level_ `use` object in your `playwright.config.ts` as follows:
 
 ```js
-use: {
+export default defineConfig({
+  testDir: './tests',
+  ..
+
+  use: {
     trace: 'on',
     screenshot: 'on',
     video: 'on'
   },
+  ..
+});
 ```
 
-Let's run the test again - and this time, open the report to see what happened. Note how the total time taken has increased drastically (from ~4s to 7s). Turning on traces and recording media are _time-intensive_ actions and should be used with discretion - typically to help debug issues.
+Let's run the test again.
 
 ```bash
-$ npx playwright test
+npx playwright test
+```
+
+Note how the total time taken has increased drastically (from ~4s to 7s). Turning on traces and recording media are _time-intensive_ actions and should be used with discretion - typically to help debug issues.
+
+```bash
 Running 4 tests using 3 workers
   4 passed (7.2s)
+```
+Lets open the HTML report to see what happened.
 
-$ npx playwright show-report
-  Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.
+```bash
+npx playwright show-report
+```
+
+```bash
+Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.
 ```
 
 Here's what the new report tells us about the power of `use`:
@@ -247,11 +287,19 @@ We covered a lot here, and need to move on. But as a challenge to yourself - try
 
 🛑 | Before we continue - note that we made a lot of changes to the `playwright.config.ts` file in the previous section. Let's reverse it and get back to our default configuration state. 
 
-The easiest way is to _copy back_ the original file as follows - run a quick test to make sure that worked.
-```bash
-$ cp tests-examples/orig-playwright.config.ts  playwright.config.ts 
+The easiest way is to _copy back_ the original file as follows.
 
-$ npx playwright test
+```bash
+cp tests-examples/orig-playwright.config.ts  playwright.config.ts
+```
+Run a quick test to make sure that worked.
+
+```bash
+npx playwright test
+```
+You should see that all 6 tests pass.
+
+```bash
 Running 6 tests using 3 workers
   6 passed (8.0s)
 ```
@@ -288,7 +336,7 @@ If you've done _test-driven development_ or _end-to-end testing_, the structure 
 
 Here is how we organize our tests in Playwright.
 
-- Every `test()` method in that specification is a [Test Case](https://playwright.dev/docs/api/class-testcase). When run in a configuration with multiple projects, each project will have _instantiate_ a version of this Test Case and configure it to suit project requirements.
+- Every `test()` method in that specification is a [Test Case](https://playwright.dev/docs/api/class-testcase). When run in a configuration with multiple projects, each project will _instantiate_ a version of this Test Case and configure it to suit project requirements.
 - Every executable statement within the Test Case is a test action that can be tracked in reporter, trace-viewer, or UI mode tooling flows.
 - Test cases can be _grouped explicitly_ into [Test Suites](https://playwright.dev/docs/api/class-suite) using `test.describe()` function. You can see an example of this in our `test-examples/demo-todo-app-spec.ts`. We'll revisit this later.
 - Test cases are _grouped implicitly_ into Suites based on the project they belong to, and the file they are contained in. This allows Playwright to target groups of tests in various ways for execution.
@@ -318,7 +366,7 @@ test.describe('Mark all as completed', () => {
   test('complete all checkbox should update state when items are completed / cleared', async ({ page }) => {
     // test actions details omitted for clarity
   });
-}
+});
 ```
  
 ### 4.4 Understand Test Structure
@@ -358,12 +406,12 @@ test('get started link', async ({ page }) => {
 ```
 1. (Arrange) - there are no explicit hooks in this test spec, but we'll talk about how `page` is a [Fixture](https://playwright.dev/docs/test-fixtures#built-in-fixtures) that also supports this goal.
 2. (Act) - the `page.goto` is an example of a [Navigation](https://playwright.dev/docs/writing-tests#navigation) action where the browser automates the user action of navigating to that URL.
-2. (Assert) - the `expect.(<locator>).toBeVisible()` is an example of a [LocatorAssertion](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) where Playwright will wait for located element to be ready (using retries) before evaluating the assertion (is it visible?).
+2. (Assert) - the `expect.(<locator>).toBeVisible()` is an example of a [LocatorAssertion](https://playwright.dev/docs/api/class-locatorassertions#locator-assertions-to-be-visible) where Playwright will wait for the located element to be ready (using retries) before evaluating the assertion (is it visible?).
 
 With this simple example, you know three powerful concepts in Playwright Testing:
  * [Fixtures](https://playwright.dev/docs/test-fixtures) - for establishing environment and _test isolation_. 
  * [Locators](https://playwright.dev/docs/locators) - for finding elements with _auto-wait and auto-retry_.
- * [Assertions](https://playwright.dev/docs/test-assertions) - for validating outcomes of automated actions _web-first_.
+ * [Assertions](https://playwright.dev/docs/test-assertions) - for validating outcomes of automated actions _web-assertions_.
 
 Take a few minutes to familiarize yourself with the documentation for those three features and APIs - and you should be all set to dive into _designing and authoring_ an end-to-end specification for the sample application.
 
