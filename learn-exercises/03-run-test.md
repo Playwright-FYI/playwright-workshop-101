@@ -290,7 +290,7 @@ We covered a lot here, and need to move on. But as a challenge to yourself - try
 The easiest way is to _copy back_ the original file as follows.
 
 ```bash
-cp tests-examples/orig-playwright.config.ts  playwright.config.ts
+cp tests-examples/orig-playwright.config.ts playwright.config.ts
 ```
 Run a quick test to make sure that worked.
 

@@ -21,7 +21,7 @@ In this workshop, we'll get an introduction to Playwright, learn core concepts, 
 
 ## What is Playwright?
 
-[Playwright](https://playwright.dev/) is an open-source framework for _reliable_ end-to-end testing for modern web apps. It is relatively new (released in 2019) but maintains an active [release schedule](https://playwright.dev/docs/release-notes#version-138), adding new features and fixing bugs at a rapid pace. The [2022 StateOfJS](https://2022.stateofjs.com/en-US/libraries/testing/) trends on testing show that Playwright is growing steadily in popularity and retention within the web development community.
+[Playwright](https://playwright.dev/) is an open-source framework for _reliable_ end-to-end testing for modern web apps. It is relatively new (released in 2020) but maintains an active [release schedule](https://playwright.dev/docs/release-notes#version-138), adding new features and fixing bugs at a rapid pace. The [2022 StateOfJS](https://2022.stateofjs.com/en-US/libraries/testing/) trends on testing show that Playwright is growing steadily in popularity and retention within the web development community.
 
 ![Playwright](./assets//playwright-ranking.png)
 
