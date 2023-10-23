@@ -35,7 +35,7 @@ Congratulations - you are now running in a GitHub Codespace. There is a generous
 
 ## Step 3: Validate The Sample App
 
-The repository comes with a [sample application](./app-todomvc/) that we'll be testing. Before we get started, let's make sure the application runs as expected.
+The repository comes with a [sample application](https://github.com/Playwright-FYI/playwright-workshop-101/tree/main/app-todomvc) that we'll be testing. Before we get started, let's make sure the application runs as expected. 
 
 1. Change to the application directory
 ```bash
