@@ -1,0 +1,12 @@
+{
+  "label": "Tutorial - Basics",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false,
+  "className": "red",
+  "link": {
+    "type": "generated-index",
+    "title" : "Basic Tutorial",
+    "description": "5 minutes to learn the most important Docusaurus concepts."
+  }
+}
