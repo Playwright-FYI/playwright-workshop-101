@@ -1,7 +1,7 @@
 {
     "name": "Playwright Workshop 101",
   
-      "image": "mcr.microsoft.com/playwright:v1.38.0-jammy",
+      "image": "mcr.microsoft.com/playwright:next-jammy",
       "features": {
           "ghcr.io/devcontainers/features/node:1": {
               "nodeGypDependencies": true,
@@ -21,7 +21,7 @@
     },
   
     "waitFor": "onCreateCommand",
-    "updateContentCommand": "npm install",
+    "updateContentCommand": "npm install -D @playwright/test@latest --save && npx playwright install",
     "postCreateCommand": "bash .devcontainer/post-create.sh",
     "postAttachCommand": { },
   
