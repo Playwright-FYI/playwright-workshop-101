@@ -12,7 +12,7 @@ Start by forking this repository to your personal profile on GitHub. The default
 
 ## Step 2: Launch GitHub Codespaces
 
-You will notice the the repository has a `.devcontainer/devcontainer.json` file. This shows that it can be run in a [development container](https://containers.dev) - a pre-configured environment (based on a Docker container image) that has all the necessary tools and libraries installed for you. You can run the container in the cloud (with GitHub Codespaces) or run it in your local device (with Docker Desktop). We'll use the first option.
+You will notice the repository has a `.devcontainer/devcontainer.json` file. This shows that it can be run in a [development container](https://containers.dev) - a pre-configured environment (based on a Docker container image) that has all the necessary tools and libraries installed for you. You can run the container in the cloud (with GitHub Codespaces) or run it in your local device (with Docker Desktop). We'll use the first option.
 
 > Click the `Code` tab on your fork of the repo, as shown below. 
 
