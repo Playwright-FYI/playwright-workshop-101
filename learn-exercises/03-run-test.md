@@ -1,66 +1,12 @@
 # Exercise: Deconstruct a Playwright Test
 
-In the previous section, we did quick run through to validate our development environment, sample application, and Playwright setup. In this section, we dive deeper into concepts like the Playwright Test _Specification_, _Configuration_, _Reporting_ and _Commandline_ for running tests.
+In the previous section, we installed Playwright using the CLI and ran the example test and opened the HTML report. In this section we will dive deeper into the Playwright Test _Specification_ and _Configuration_.
 
 Let's get started.
 
-## Step 1: Run Example Test Spec
+## Step 1: Understand TestConfig
 
-Recall that we reset our `testDir` to point to the `tests/` directory. That means the Playwright Test runner will only find specifications within the `tests/*` sub-tree. Right now that contains a single file - `example.spec.ts` - which is provided by default when you initialize a new Playwright project.
-
-Let's run the test. 
-
-```bash
-npx playwright test
-```
-We get the following output - indicating that all tests passed. But what does `6 tests` and `3 workers` mean given we only had one test specification?
-
-```bash
-Running 6 tests using 3 workers
-  6 passed
-
-To open last HTML report run:
-  npx playwright show-report
-```
-
-## Step 2: View Test Report
-
-Let's see if the HTML report gives us any more information. Let's open the report by typing the following command in the terminal.
-
-```bash
-npx playwright show-report
-```
-We should then get the following message telling us the report is being served locally and a browser window will open with the report.
-
-```bash
-Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.
-```
-
-The report gives us the following insights:
- - We have 2 test cases ("has title", "get started link")
- - We ran each across 3 browser engines (chromium, firefox, webkit)
- - The test cases were defined in the `example.spec.ts` file
- - The test run took _4.0s_ with all 6 tests passing (none skipped)
-
-![Playwright Example Spec Report Main](./assets/03-run-report-main.png)
-
-Clicking on a particular row gives you the detailed run of that test case. For example if we click on the first one, we get the following details:
- - The test is called "has title"
- - The file name is `example.spec.ts` and the line number is `3`
- - This test case was run on Chromium
- - The "Before Hooks" ran first. This launches the browser and sets the browser and page _context_ (fixtures) for test isolation.
- - The Test "Action" on line 4 ran next. This resulted in a _navigation_ to a specific page.
- - Then the Test "Assertion" on line 7 executes. This _validates_ that the page has a specific title.
- - The "After Hooks" run last. They take any context _cleanup_ actions needed. 
- - This test case took "525 ms" to complete.
-
-![Playwright Example Spec Report Detail](./assets/03-run-report-detail.png)
-
-This answers our question on what the `6 tests` were. But what does `3 workers` mean? And where did we define these configuration parameters and test specification actions? 
-
-By default Playwright runs tests in parallel. To do this it uses workers. The number of workers is determined by the number of CPU cores available. Playwright will use half of the available CPU cores. You can override this by setting the `workers` property in the [Playwright Configuration](https://playwright.dev/docs/test-configuration) file.
-
-## Step 3: Understand TestConfig
+Let's open the project we created in the previous section in our favorite code editor and explore the files that Playwright installed. We will be using Visual Studio Code for this workshop.
 
 Let's start by learning about Playwright Test _configuration_. 
  - The [`playwright.config.ts`](https://playwright.dev/docs/test-configuration#basic-configuration) file defines the default Test Runner configuration. 
@@ -112,9 +58,61 @@ We can refer to the [Basic Configuration](https://playwright.dev/docs/test-confi
  - [`use`](https://playwright.dev/docs/api/class-testconfig#test-config-use) = set _[global options](https://playwright.dev/docs/test-use-options)_ for all tests (can be [overriden](https://playwright.dev/docs/test-use-options#configuration-scopes) at project or test scope)
  - [`projects`](https://playwright.dev/docs/api/class-testconfig#test-config-projects) = run tests in _multiple configurations_ (think browsers, emulators, options)
 
+### 3.1 Configure Test Dir
+
+The `testDir` property tells Playwright where to look for test files. By default, it is set to `./tests` which means that Playwright will look for test files in the `tests` folder. If you have your test files in a different folder, you can change this property to point to that folder. 
+
+Let's change the `testDir` property to `.` so that Playwright looks for test files in the root of the project. 
+
+```js
+export default defineConfig({
+  testDir: '.',
+  ..
+});
+```
+
+Now that we have updated the `testDir` property, let's run the tests again and see what happens.
+
+```bash
+npx playwright test
+```
+
+This time, Playwright will look for test files in the root of the project and run the tests. 
+
+```bash
+Running 78 tests using 5 workers
+  78 passed (15.4s)
+
+To open last HTML report run:
+
+  npx playwright show-report
+```
+Wow, that's a lot of tests. Let's open the HTML report to see what happened.
+
+```bash
+npx playwright show-report
+```
+
+![HTML report showing 2 test files](./assets/03-run-report.png)
+
+The report tells us that tests were run in `tests/example.spec.ts` and `tests-examples/demo-todo-app.spec.ts` and on the 3 different browser engines - `chromium`, `firefox`, and `webkit`. As we set the testDir to the root of the project, Playwright found all the test files in the project and ran them.
+
+Let's set the `testDir` back to `./tests` so we can move on to the next exercise.
+
+```js
+export default defineConfig({
+  testDir: './tests',
+  ..
+});
+```
+
 ### 3.1 Configure Projects
 
-A project is a group of tests that run with the same configuration and can be used to run tests on different browsers and devices. The first project in the configuration file has the name of `chromium` and it uses the device of `Desktop Chrome`.
+A project is a group of tests that run with the same configuration and can be used to run tests on different browsers and devices. In the last section we saw how we can run a test on the Chromium browser by adding the `--project` option after the test command in the CLI. 
+
+Projects are defined in the `projects` array in the configuration file. By default Playwright comes with 3 projects already defined, _chromium_, _firefox_ and _webkit_. This is why our tests ran on all 3 browsers. 
+
+Each project has a _name_ property and a _use_ property. The _use_ option defines what the project should use. For example the device of Desktop Chrome for the chromium project.
 
 ```bash
   projects: [
@@ -134,28 +132,38 @@ Excellent! We can see that we now have the 2 test cases running on a single brow
 
 ```bash
 Running 2 tests using 2 workers
-  2 passed
+  2 passed (1.2s)
+
+To open last HTML report run:
+
+  npx playwright show-report
 ```
+
+Let's run the `show-report` command and note how the report now only shows us the 2 tests on the one browser.
+
+![HTML report showing 2 test files](./assets/03-run-report-one-project.png)
 
 ### 3.2 Explore Emulation
 
-Playwright supports [Emulation](https://playwright.dev/docs/emulation) for mobile testing. 
-  - Select a device profile from the [supported emulation profiles](https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json) and add it as a new project in the configuration file. 
+Playwright supports [Emulation](https://playwright.dev/docs/emulation) for mobile testing. You can select device profiles from the [supported emulation profiles](https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json) and add it as a new project in the configuration file. 
+
+Although you may have noticed that the default configuration file has a commented out section for testing against mobile viewports. Lets uncomment out the project for `Mobile Safari`.
 
 ```bash
-
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    
     {
-      name: 'iPhone 12 Pro',
+      name: 'Mobile Safari',
       use: { ...devices['iPhone 12 Pro'] },
     },
   ],
 ```
-I chose the `iPhone 12 Pro`. Here is what that [profile description](https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json) looks like:
+
+Here is what the [profile description](https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json) for the `iPhone 12 Pro`looks like:
 
 ```json
   "iPhone 12 Pro": {
@@ -180,7 +188,7 @@ Let's run our tests again.
 ```bash
 npx playwright test
 ```
-This will run our two tests on the `chromium` and `iPhone 12 Pro` projects. We can see that we now have 2 test executions.
+This will run our two tests on the `chromium` and `Mobile Safari` projects. We can see that we now have 2 test executions.
 
 ```bash
 Running 4 tests using 4 workers
@@ -250,7 +258,7 @@ npx playwright show-report
 Serving HTML report at http://localhost:9323. Press Ctrl+C to quit.
 ```
 
-![](./assets/03-run-use-report.png)
+![report showing screenshots](./assets/03-run-use-report.png)
 
 Turning on options like recording are expensive, so use with discretion - e.g., for debugging on CI.
 
@@ -259,14 +267,13 @@ Let's take a look at the detail view of one of our tests using the `chromium` pr
 
  1. This time, the detail view includes a screenshot (from `page.goto`). This is useful for visual regression testing.
 ![](./assets/03-run-use-report-screenshot.png)
- 1. Most importantly, we get a link to a trace of our test.
-![](./assets/03-run-use-report-trace.png)
- 1. The trace gives us a detailed view of our test where we can easily step through each action as well as explore the network requests, console and even pop out the DOM snapshot and inspect it (think debugging!).
-![](./assets/03-run-use-report-trace-detail.png)
+ 1. Most importantly, we get a link to a trace of our test. To open the trace click on the trace icon in the list view or the image of the trace when in the detail view of the test.
+![link to trace from report](./assets/03-run-use-report-trace.png)
+ 1. The trace gives us a detailed view of our test where we can easily step through each action as well as explore the network requests, console and even pop out the DOM snapshot and inspect it (think debugging!). Let's explore this in more detail in the next section.
+![trace of our test](./assets/03-run-use-report-trace-detail.png)
 
-
-Let's go back to the report and select on the of tests run on the our `iPhone 12 Pro` project. The detail page for the mobile project reflects the emulated profile view where once again we can explore the trace for our emulated test.
-![](./assets/03-run-use-report-screenshot-mobile.png)
+Let's go back to the report and select one of tests run on the our `Mobile Safari` project. The detail page for the mobile project reflects the emulated profile view where once again we can explore the trace for our emulated test.
+![report showing screenshot of mobile safari](./assets/03-run-use-report-screenshot-mobile.png)
 
 Turning on traces for every test run is not recommended for _production_ runs. Let's change the config back to run traces on the first retry of a failed tests that way if our test fails on CI we will have a trace to help debug the issue. 
 

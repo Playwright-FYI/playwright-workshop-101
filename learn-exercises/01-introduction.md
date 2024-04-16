@@ -15,7 +15,7 @@ Thanks to CI/CD pipelines, modern web apps are deployed more frequently, often b
 
 Delivering a reliable and consistent user experience in this environment is challenging. _Testing_ becomes critical to ensure that the app is working as expected, and that new changes don't break existing functionality. Traditional Quality Assurance approaches that relied on _manual testers_ won't scale to the demands of these modern apps. We need _automated testing_ approaches that can perform _repetitive, time-consuming tests_ reliably and consistently.
 
-Test Automation is the process of using _software tools and processes_ to execute testing strategies with minimal manual involvement and automated repetable workflows. Test Automation _frameworks_ provide tools, libraries and rules for developers to execute automated testing plans. [Popular options](https://saucelabs.com/resources/blog/top-test-automation-frameworks-in-2023) include Selenium, Cypress, and [Playwright](https://playwright.dev). 
+Test Automation is the process of using _software tools and processes_ to execute testing strategies with minimal manual involvement and automated repeatable workflows. Test Automation _frameworks_ provide tools, libraries and rules for developers to execute automated testing plans. [Popular options](https://saucelabs.com/resources/blog/top-test-automation-frameworks-in-2023) include Selenium, Cypress, and [Playwright](https://playwright.dev). 
 
 In this workshop, we'll get an introduction to Playwright, learn core concepts, and understand how to use its core tools and workflows to implement an automated end-to-end testing strategy.
 
