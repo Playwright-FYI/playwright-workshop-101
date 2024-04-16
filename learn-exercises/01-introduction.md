@@ -34,7 +34,6 @@ There are [many reasons for choosing Playwright](https://playwright.dev/docs/why
  1. _Test Isolation_. Every test runs in its own _BrowserContext_, independent of other tests running at the same time. Tests are run in parallel (for optimization) and one test failure will not impact others (for reliability).
  1. _Powerful Tooling_. Playwright streamlines the developer experience from test authoring, to execution, debugging, reporting, and profiling - with options to use a CLI or the Visual Studio Code extension.
 
-![Playwright](./assets/playwright-overview.png)
 
 ## Playwright Core Concepts
 
