@@ -106,7 +106,7 @@ export default defineConfig({
 });
 ```
 
-### 3.1 Configure Projects
+### 3.2 Configure Projects
 
 A project is a group of tests that run with the same configuration and can be used to run tests on different browsers and devices. In the last section we saw how we can run a test on the Chromium browser by adding the `--project` option after the test command in the CLI. 
 
@@ -143,7 +143,7 @@ Let's run the `show-report` command and note how the report now only shows us th
 
 ![HTML report showing 2 test files](./assets/03-run-report-one-project.png)
 
-### 3.2 Explore Emulation
+### 3.3 Explore Emulation
 
 Playwright supports [Emulation](https://playwright.dev/docs/emulation) for mobile testing. You can select device profiles from the [supported emulation profiles](https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json) and add it as a new project in the configuration file. 
 
@@ -211,7 +211,7 @@ Note how the same 2 test cases are executed, now with the `chromium` browser and
 
 We can [override the default profile properties](https://playwright.dev/docs/emulation) via the Playwright configuration file (global) or within a Test Specification file (local override) - but to try that out, we first need to understand the `use` directive.
 
-### 3.3 Explore `use` Options
+### 3.4 Explore `use` Options
 
 Playwright has a [`use` property](https://playwright.dev/docs/test-use-options) to configure the Test Runner for the following features:
  - [Basic](https://playwright.dev/docs/test-use-options#basic-options) - set `baseURL` (maps to "/" route) and `storageState` (e.g., load auth).
