@@ -62,8 +62,6 @@ Speaking of debugging you can also pick a locator from the DOM snapshot by click
 
 Feel free to explore on your own the rest of the features of the trace viewer such as the _Call_, _Console_, _Network_, _Source_ tabs, etc.
 
-
-
 ## 4.7 Debugging Tests
 
 For debugging we recommend running your tests with the _Show trace viewer_ option and using the trace of your tests to better understand what is happening. 
