@@ -1,8 +1,6 @@
 # Playwright Fundamentals (Workshop 101)
 
-In this Learn lab, you'll learn how to use the Playwright open-source test automation framework for building an end-to-end test specification for a sample application. 
- - We'll be using a _modified version_ of the [TasteJS TODO MVC application](https://github.com/tastejs/todomvc)
- - Our version reflects [this Playwright demo](https://demo.playwright.dev/todomvc) that's used as an example.
+In this Learn lab, you'll learn how to use the Playwright open-source test automation framework for building an end-to-end test specification for a sample application.
 
 
 ## The Scenario
@@ -29,21 +27,7 @@ By the end of this lab, you should be able to:
 ## Pre-Requisites
  - Familiarity with Node.js and related ecosystem of tools and libraries.
  - Familiarity with GitHub - and a valid GitHub account.
- - Familarity with Visual Studio Code - and using VS Code Extensions.
+ - Familiarity with Visual Studio Code - and using VS Code Extensions.
  - General understanding of testing concepts and terminology.
-
-## About This Project 
-
-This workshop repository is configured to use a [dev container](https://containers.dev) that sets up a development environment in a custom Docker container that can be run in the cloud (with GitHub Codespaces) or on your local device (with Docker Desktop).
-
-The default container is provisioned with:
- - A Node.js runtime with supporting tools & libraries
- - The Playwright test runner and browser dependencies
- - The Visual Studio Code editor with Playwright extension
-
-The default repository is populated with:
- - A [sample application](./app-todomvc/) that we'll be testing (with source).
- - A [Playwright project](./playwright.config.js) to start from, in building our test suite.
- - A [set of exercises](./learn-exercises/) that we'll worth through, step-by-step, for this purpose.
 
 Ready to get started? Head to the [first Learn Exercise](./learn-exercises/01-introducton.md) to get going.
