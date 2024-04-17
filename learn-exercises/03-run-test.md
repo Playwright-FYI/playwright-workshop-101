@@ -211,6 +211,8 @@ Note how the same 2 test cases are executed, now with the `chromium` browser and
 
 We can [override the default profile properties](https://playwright.dev/docs/emulation) via the Playwright configuration file (global) or within a Test Specification file (local override) - but to try that out, we first need to understand the `use` directive.
 
+Before we do that let's reset our `playwright.config.ts` file to run tests on the _chromium_, _firefox_ and _webkit_ projects and comment out the _Mobile Safari_ project.
+
 ### 3.4 Explore `use` Options
 
 Playwright has a [`use` property](https://playwright.dev/docs/test-use-options) to configure the Test Runner for the following features:
